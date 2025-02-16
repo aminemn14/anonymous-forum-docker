@@ -11,14 +11,28 @@ app.get("/", (req, res) => {
   const html = `
     <!doctype html>
     <html>
-    <head><title>Forum - Sender</title></head>
-    <body>
-      <h1>Post a Message</h1>
-      <form action="/send" method="post">
-        <label>Pseudonym: <input type="text" name="pseudonym"></label><br>
-        <label>Message: <textarea name="content"></textarea></label><br>
-        <button type="submit">Send</button>
-      </form>
+    <head>
+      <meta charset="utf-8">
+      <title>Forum - Sender</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gradient-to-r from-blue-50 to-indigo-50 h-screen flex items-center justify-center">
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-3xl font-bold mb-6 text-center">Post a Message</h1>
+        <form action="/send" method="post" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Pseudonym</label>
+            <input type="text" name="pseudonym" placeholder="Your pseudonym" class="mt-1 p-2 block w-full rounded-md border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Message</label>
+            <textarea name="content" rows="4" placeholder="Your message" class="mt-1 p-2 block w-full rounded-md border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+          </div>
+          <div>
+            <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">Send</button>
+          </div>
+        </form>
+      </div>
     </body>
     </html>
   `;

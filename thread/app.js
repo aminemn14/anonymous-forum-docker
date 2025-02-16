@@ -11,16 +11,36 @@ app.get("/", async (req, res) => {
     let html = `
       <!doctype html>
       <html>
-      <head><title>Forum - Thread</title></head>
-      <body>
-        <h1>Forum Messages</h1>
-        <ul>
+      <head>
+        <meta charset="utf-8">
+        <title>Forum - Thread</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+      <body class="bg-gray-100">
+        <div class="container mx-auto p-6">
+          <h1 class="text-4xl font-extrabold text-center mb-8">Forum Messages</h1>
+          <div class="space-y-4">
     `;
     messages.forEach((message) => {
-      html += `<li><strong>${message.pseudonym}</strong>: ${message.content}</li>`;
+      // Extraire la première lettre du pseudonyme pour l'afficher dans un avatar
+      let initial = message.pseudonym.charAt(0).toUpperCase();
+      html += `
+        <div class="flex items-start bg-white p-4 rounded-lg shadow">
+          <div class="flex-shrink-0">
+            <div class="h-12 w-12 bg-indigo-500 rounded-full flex items-center justify-center">
+              <span class="text-white font-bold">${initial}</span>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="font-semibold text-lg">${message.pseudonym}</p>
+            <p class="text-gray-700">${message.content}</p>
+          </div>
+        </div>
+      `;
     });
     html += `
-        </ul>
+          </div>
+        </div>
       </body>
       </html>
     `;
