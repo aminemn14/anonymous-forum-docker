@@ -3,7 +3,7 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 const app = express();
 
-const API_URL = process.env.API_URL || "http://api:5000";
+const API_URL = process.env.API_URL || "http://api:5100";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 

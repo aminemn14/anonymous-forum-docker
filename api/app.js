@@ -50,7 +50,7 @@ app.post("/messages", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5100;
 app.listen(port, () => {
   console.log(`API running on port ${port}`);
 });
