@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: forumuser
+      POSTGRES_PASSWORD: forumpass
+      POSTGRES_DB: forum_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  api:
+    build: ./api
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://forumuser:forumpass@db:5432/forum_db
+    depends_on:
+      - db
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "5000:5000"
+
+  thread:
+    build: ./thread
+    environment:
+      API_URL: http://api:5000
+    depends_on:
+      - api
+    networks:
+      - frontend
+    ports:
+      - "80:80"
+
+  sender:
+    build: ./sender
+    environment:
+      API_URL: http://api:5000
+    depends_on:
+      - api
+    networks:
+      - frontend
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:
+
+networks:
+  backend:
+  frontend:
