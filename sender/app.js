@@ -16,22 +16,36 @@ app.get("/", (req, res) => {
       <title>Forum - Sender</title>
       <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="bg-gradient-to-r from-blue-50 to-indigo-50 h-screen flex items-center justify-center">
-      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-3xl font-bold mb-6 text-center">Post a Message</h1>
-        <form action="/send" method="post" class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Pseudonym</label>
-            <input type="text" name="pseudonym" placeholder="Your pseudonym" class="mt-1 p-2 block w-full rounded-md border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+    <body class="bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen">
+      <!-- Barre de navigation -->
+      <nav class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div class="text-2xl font-bold text-indigo-600">
+            Mon Forum Anonyme
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Message</label>
-            <textarea name="content" rows="4" placeholder="Your message" class="mt-1 p-2 block w-full rounded-md border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+            <a href="http://localhost" class="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md text-sm font-medium">Voir le Forum</a>
           </div>
-          <div>
-            <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">Send</button>
-          </div>
-        </form>
+        </div>
+      </nav>
+      <!-- Contenu principal -->
+      <div class="flex items-center justify-center py-12">
+        <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+          <h1 class="text-3xl font-bold mb-6 text-center">Poster un Message</h1>
+          <form action="/send" method="post" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Pseudonyme</label>
+              <input type="text" name="pseudonym" placeholder="Votre pseudonyme" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Message</label>
+              <textarea name="content" rows="4" placeholder="Votre message" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+            </div>
+            <div>
+              <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">Envoyer</button>
+            </div>
+          </form>
+        </div>
       </div>
     </body>
     </html>

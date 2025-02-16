@@ -16,13 +16,24 @@ app.get("/", async (req, res) => {
         <title>Forum - Thread</title>
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <body class="bg-gray-100">
+      <body class="bg-gray-100 min-h-screen">
+        <!-- Barre de navigation -->
+        <nav class="bg-white shadow">
+          <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-indigo-600">
+              Mon Forum Anonyme
+            </div>
+            <div>
+              <a href="http://localhost:8080" class="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md text-sm font-medium">Poster un Message</a>
+            </div>
+          </div>
+        </nav>
+        <!-- Contenu principal -->
         <div class="container mx-auto p-6">
           <h1 class="text-4xl font-extrabold text-center mb-8">Forum Messages</h1>
           <div class="space-y-4">
     `;
     messages.forEach((message) => {
-      // Extraire la première lettre du pseudonyme pour l'afficher dans un avatar
       let initial = message.pseudonym.charAt(0).toUpperCase();
       html += `
         <div class="flex items-start bg-white p-4 rounded-lg shadow">
