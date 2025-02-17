@@ -7,7 +7,10 @@ const API_URL = process.env.API_URL || "http://api:5100";
 app.get("/", async (req, res) => {
   try {
     const response = await axios.get(`${API_URL}/messages`);
-    const messages = response.data;
+    let messages = response.data;
+
+    messages.reverse();
+
     let html = `
       <!doctype html>
       <html>
