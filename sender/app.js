@@ -3,8 +3,10 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 const app = express();
 
+// URL de l'API en variable d'env
 const API_URL = process.env.API_URL || "http://api:5100";
 
+// Middleware pour parser les données
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
@@ -53,16 +55,20 @@ app.get("/", (req, res) => {
   res.send(html);
 });
 
+// Route pour traiter l'envoi du formulaire et rediriger vers l'API
 app.post("/send", async (req, res) => {
   const { pseudonym, content } = req.body;
+  // Vérification de la présence des champs requis
   if (!pseudonym || !content) {
     return res.status(400).send("Missing pseudonym or content");
   }
   try {
+    // Envoi du message à l'API
     const response = await axios.post(`${API_URL}/messages`, {
       pseudonym,
       content,
     });
+    // Redirection en cas de succès
     if (response.status === 201) {
       return res.redirect("/");
     } else {

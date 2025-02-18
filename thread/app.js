@@ -2,13 +2,16 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 
+// URL de l'API en variable d'env
 const API_URL = process.env.API_URL || "http://api:5100";
 
 app.get("/", async (req, res) => {
   try {
+    // Récupère les messages depuis l'API
     const response = await axios.get(`${API_URL}/messages`);
     let messages = response.data;
 
+    // Inverser l'ordre des messages pour afficher le plus récent en haut
     messages.reverse();
 
     let html = `
@@ -36,7 +39,10 @@ app.get("/", async (req, res) => {
           <h1 class="text-4xl font-extrabold text-center mb-8">Forum Messages</h1>
           <div class="space-y-4">
     `;
+
+    // Ajout de cartes pour chaque messages
     messages.forEach((message) => {
+      // Récupère la première lettre du pseudonyme pour l'afficher dans l'avatar
       let initial = message.pseudonym.charAt(0).toUpperCase();
       html += `
         <div class="flex items-start bg-white p-4 rounded-lg shadow">
@@ -52,6 +58,7 @@ app.get("/", async (req, res) => {
         </div>
       `;
     });
+
     html += `
           </div>
         </div>
