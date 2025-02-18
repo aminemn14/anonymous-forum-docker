@@ -68,9 +68,27 @@ app.post("/send", async (req, res) => {
       pseudonym,
       content,
     });
-    // Redirection en cas de succès
+    // En cas de succès (code 201), on affiche une page avec le popup
     if (response.status === 201) {
-      return res.redirect("/");
+      return res.send(`
+        <!doctype html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Message Envoyé</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+        </head>
+        <body class="bg-gray-100 flex items-center justify-center h-screen">
+          <!-- Modal de confirmation -->
+          <div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+              <h2 class="text-2xl font-bold mb-6">Message envoyé avec succès !</h2>
+              <a href="http://localhost" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700">Retour à l'accueil</a>
+            </div>
+          </div>
+        </body>
+        </html>
+      `);
     } else {
       return res.status(400).send("Failed to post message");
     }
